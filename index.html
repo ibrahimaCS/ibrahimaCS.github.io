@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ibrahima Diaby — Developer &amp; Engineering Student</title>
+  <meta name="description" content="Portfolio of Ibrahima Diaby — Developer and Computer Engineering student at ENSIIE. Interested in Computer Networking, HPC, AI/ML Infrastructure, Systems Administration, Embedded Systems and Quantum Engineering." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ==================== Reset ==================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ==================== Variables ==================== */
+    :root {
+      --bg: #0a192f;
+      --bg-soft: #0f2444;
+      --bg-card: #10233f;
+      --ink: #e6f1ff;
+      --ink-muted: #8fa5c2;
+      --ink-dim: #607b9c;
+      --accent: #ffd166;
+      --accent-2: #64ffda;
+      --rule: rgba(230, 241, 255, 0.10);
+      --rule-hover: rgba(100, 255, 218, 0.35);
+      --max: 820px;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(230, 241, 255, 0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: -300px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(100, 255, 218, 0.06), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    a:hover { color: var(--accent-2); border-color: var(--accent-2); }
+
+    /* ==================== Layout ==================== */
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 96px 24px 120px;
+    }
+
+    /* ==================== Side navigation ==================== */
+    .side-nav {
+      position: fixed;
+      left: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      z-index: 10;
+    }
+    .side-nav a {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      border: 1px solid var(--ink-muted);
+      background: transparent;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .side-nav a::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 22px; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+    }
+    .side-nav a:hover, .side-nav a.active {
+      background: var(--accent-2);
+      border-color: var(--accent-2);
+    }
+    .side-nav a:hover::after { opacity: 1; }
+
+    @media (max-width: 900px) { .side-nav { display: none; } }
+
+    /* ==================== Hero ==================== */
+    .hero { margin-bottom: 96px; }
+    .hero .greet {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent-2);
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(44px, 7vw, 76px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .hero .tagline {
+      font-size: 19px;
+      color: var(--ink-muted);
+      max-width: 640px;
+      margin-bottom: 32px;
+    }
+    .hero .tagline strong { color: var(--ink); font-weight: 500; }
+    .hero .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-muted);
+      padding: 6px 12px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .hero .status .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 8px var(--accent-2);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 2px;
+    }
+    .hero-links a::before { content: "→"; color: var(--accent-2); }
+
+    /* ==================== Section ==================== */
+    section { margin-bottom: 88px; scroll-margin-top: 40px; }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .sec-head .num {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent-2);
+      letter-spacing: 0.05em;
+    }
+    .sec-head h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 30px;
+      letter-spacing: -0.01em;
+    }
+
+    .about p { margin-bottom: 16px; color: var(--ink-muted); font-size: 16px; }
+    .about p strong { color: var(--ink); font-weight: 500; }
+    .about p em {
+      color: var(--accent);
+      font-style: normal;
+      font-family: var(--mono);
+      font-size: 14px;
+    }
+
+    /* ---- "Heading next" callout ---- */
+    .heading-next {
+      margin-top: 28px;
+      padding: 20px 22px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent-2);
+      border-radius: 4px;
+    }
+    .heading-next h3 {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+    .heading-next p {
+      color: var(--ink-muted);
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    .heading-next .targets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .heading-next .targets span {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink);
+      padding: 4px 10px;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+    }
+
+    /* ==================== Timeline items ==================== */
+    .item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+      transition: padding 0.25s ease;
+    }
+    .item:hover { padding-left: 8px; }
+    .item:last-child { border-bottom: none; }
+
+    .item .when {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-muted);
+      padding-top: 6px;
+      letter-spacing: 0.03em;
+    }
+    .item .what h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 21px;
+      margin-bottom: 4px;
+    }
+    .item .what .role {
+      font-size: 14px;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+    .item .what p {
+      font-size: 15px;
+      color: var(--ink-muted);
+    }
+    .item .what ul {
+      list-style: none;
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+    .item .what ul li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 6px;
+    }
+    .item .what ul li::before {
+      content: "▸";
+      position: absolute;
+      left: 0; top: 0;
+      color: var(--accent-2);
+    }
+    .item .what code {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent-2);
+      background: rgba(100, 255, 218, 0.05);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    @media (max-width: 600px) {
+      .item { grid-template-columns: 1fr; gap: 4px; }
+      .item .when { padding-top: 0; margin-bottom: 4px; }
+    }
+
+    /* ==================== Projects ==================== */
+    .projects { display: grid; gap: 16px; }
+    .project-card {
+      display: block;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--rule-hover);
+      background: #12294a;
+    }
+    .project-card .top {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 4px;
+      gap: 12px;
+    }
+    .project-card h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--ink);
+    }
+    .project-card .ext {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-2);
+      border: none;
+      white-space: nowrap;
+    }
+    .project-card .meta {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-dim);
+      margin-bottom: 12px;
+      letter-spacing: 0.03em;
+    }
+    .project-card p {
+      color: var(--ink-muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .project-card p strong { color: var(--ink); font-weight: 500; }
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .stack span {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-muted);
+      padding: 3px 10px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+    }
+
+    /* ==================== Skills ==================== */
+    .skills-grid {
+      display: grid;
+      gap: 24px;
+    }
+    .skill-group h3 {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .skill-group .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-group .tags span {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink);
+      padding: 5px 12px;
+      background: var(--bg-soft);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .skill-group .tags span:hover {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+    }
+
+    /* ==================== Two-column mini section ==================== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .two-col h3 {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .two-col .cert-line, .two-col p {
+      color: var(--ink-muted);
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .two-col .cert-line strong { color: var(--ink); font-weight: 500; }
+    .two-col .cert-line .date {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-dim);
+      display: block;
+      margin-top: 2px;
+    }
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* ==================== Contact ==================== */
+    .contact-block {
+      text-align: center;
+      padding: 40px 0 20px;
+    }
+    .contact-block h2 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(32px, 5vw, 52px);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .contact-block h2 em { color: var(--accent); font-style: italic; }
+    .contact-block p {
+      color: var(--ink-muted);
+      margin-bottom: 32px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .contact-btn {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 14px;
+      padding: 14px 28px;
+      border: 1px solid var(--accent-2);
+      color: var(--accent-2);
+      border-radius: 4px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .contact-btn:hover {
+      background: var(--accent-2);
+      color: var(--bg);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 40px;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+    .contact-links a { border: none; color: var(--ink-muted); }
+    .contact-links a:hover { color: var(--accent-2); }
+
+    /* ==================== Footer ==================== */
+    footer {
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-dim);
+    }
+    footer a { border: none; color: var(--ink-dim); }
+    footer a:hover { color: var(--accent-2); }
+
+    @media (max-width: 500px) {
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    /* ==================== Reveal animation ==================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    ::selection { background: var(--accent-2); color: var(--bg); }
+  </style>
+</head>
+<body>
+
+  <!-- Side navigation -->
+  <nav class="side-nav" aria-label="Section navigation">
+    <a href="#about"      data-label="About"      ></a>
+    <a href="#education"  data-label="Education"  ></a>
+    <a href="#experience" data-label="Experience" ></a>
+    <a href="#projects"   data-label="Projects"   ></a>
+    <a href="#skills"     data-label="Skills"     ></a>
+    <a href="#extra"      data-label="Extra"      ></a>
+    <a href="#contact"    data-label="Contact"    ></a>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- ============ HERO ============ -->
+    <header class="hero reveal">
+      <div class="greet">// Hi, my name is</div>
+      <h1>Ibrahima Diaby.<br /><em>Developer &amp; engineering student.</em></h1>
+      <div class="status"><span class="dot"></span> Open to Summer 2027 internships</div>
+      <p class="tagline">
+        Computer Engineering & Applied Math student at <strong>ENSIIE</strong>, I like exploring complex systems from low-level to
+        high-level programming — curious about <strong>Computer Networking</strong>,
+        <strong>High-Performance Computing(HPC)</strong>, <strong>AI/ML Infrastructure</strong>,
+        <strong>Systems Administration</strong>, <strong>Embedded Systems</strong>
+        and <strong>Quantum Engineering</strong>.
+      </p>
+      <div class="hero-links">
+        <a href="https://github.com/ibrahimaCS/" target="_blank" rel="noopener">github</a>
+        <a href="https://www.linkedin.com/in/ibrahima-diaby-73b43b396" target="_blank" rel="noopener">linkedin</a>
+        <a href="#projects">projects</a>
+        <a href="#contact">contact</a>
+      </div>
+    </header>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="reveal">
+      <div class="sec-head">
+        <span class="num">01</span>
+        <h2>About</h2>
+      </div>
+      <div class="about">
+        <p>
+          I'm a first-year engineering student at <strong>ENSIIE</strong>
+          <em>(École Nationale Supérieure d'Informatique pour l'Industrie et l'Entreprise)</em>,
+          with a background in French <em>Classes Préparatoires</em> and a strong
+          taste for programming.
+        </p>
+        <p>
+          I've written code close to the metal (a bytecode VM in C, tail-recursive
+          OCaml) and code close to
+          production (Flask back-ends, Python, REST APIs, resilience patterns, WSGI
+          deployment).
+        </p>
+
+        <div class="heading-next">
+          <h3>▸ Where I'm heading — Summer 2027</h3>
+          <p>
+            Looking for a summer 2027 internship in one of the areas below.
+          </p>
+          <div class="targets">
+            <span>Computer Networking</span>
+            <span>High-Performance Computing</span>
+            <span>AI / ML Infrastructure</span>
+            <span>Software Engineering</span>
+            <span>Systems Administration</span>
+            <span>Embedded Systems</span>
+            <span>Quantum Engineering</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EDUCATION ============ -->
+    <section id="education" class="reveal">
+      <div class="sec-head">
+        <span class="num">02</span>
+        <h2>Education</h2>
+      </div>
+
+      <div class="item">
+        <div class="when">2025 — 2028</div>
+        <div class="what">
+          <h3>ENSIIE</h3>
+          <div class="role">Engineering degree · Computer Engineering &amp; Applied Mathematics</div>
+
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="when">2023 — 2025</div>
+        <div class="what">
+          <h3>CPGE — Classes Préparatoires aux Grandes Écoles</h3>
+          <div class="role">Mathématics-Physics track · Thiès, Senegal</div>
+          <p>
+            Two intensive years of scientific preparatory classes providing a strong
+            foundation in Mathematics, Physics and Computer Science
+            (Python, SQL, Machine Learning).
+          </p>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="when">— 2023</div>
+        <div class="what">
+          <h3>Lycée Macire Ba</h3>
+          <div class="role">High School diploma</div>
+          <p>
+            High-school scientific curriculum with a strong focus on Mathematics, Physics and Chemistry.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience" class="reveal">
+      <div class="sec-head">
+        <span class="num">03</span>
+        <h2>Experience</h2>
+      </div>
+
+      <div class="item">
+        <div class="when">Jul — Aug 2026</div>
+        <div class="what">
+          <h3>Conservatoire National des Arts et Métiers (Cnam)</h3>
+          <div class="role">Scientific Software Engineering Intern · Mathematics &amp; Statistics Department</div>
+          <p>
+            Two-month internship under Prof. <strong>Dariush Ghorbanzadeh</strong>,
+            designing an end-to-end scientific software platform for sector-based
+            financial modelling on Yahoo Finance data. Delivered a three-layer
+            stack: data pipeline → constrained Gaussian mixture estimator →
+            Flask platform with a versioned JSON API.
+          </p>
+          <ul>
+            <li><strong>Back-end architecture.</strong> Layered design with a pure
+                computation engine,
+                <strong>application factory</strong> pattern, a versioned REST blueprint
+                (<code>/api/v1/*</code>) with <strong>7 endpoints</strong>, and
+                <strong>6 HTML routes</strong>.</li>
+
+            <li><strong>Statistical core.</strong> Constrained Gaussian mixture
+                estimator using <strong>SLSQP</strong> with equality constraints on
+                the first two empirical moments; model selection via
+                <strong>BIC</strong> (K ∈ {2, 3}); implemented on top of
+                <strong>NumPy / SciPy / Pandas</strong>.</li>
+            <li><strong>Production resilience.</strong> Custom module implementing
+                three thread-safe patterns on the costly density endpoint:
+                <strong>circuit breaker</strong> per ticker (opens after 3
+                consecutive failures for 30 s), <strong>semaphore-based
+                concurrency limiter</strong> (10 parallel max, queue of 50,
+                fail-fast 503 = load shedding), and an in-memory <strong>TTL cache</strong>
+                (5 min) with hit/miss telemetry.</li>
+            <li><strong>Contracts &amp; validation.</strong> JSON contracts between
+                pipeline parts (loaded once in memory at boot for O(1) access),
+                strict input validation via <strong>Flask-WTF</strong>, and
+                liveness / readiness health checks exposing internal state.</li>
+            <li><strong>Testing &amp; delivery.</strong> ~25 <strong>pytest</strong>
+                tests split in three classes (engine unit tests checking
+                mathematical properties, HTTP integration tests through Flask's
+                <code>test_client</code>, form-validation tests). Deployed via <strong>WSGI</strong> on PythonAnywhere,
+                versioned on <strong>GitLab</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="reveal">
+      <div class="sec-head">
+        <span class="num">04</span>
+        <h2>Projects</h2>
+      </div>
+
+      <div class="projects">
+
+        <!-- Project 1 : Particle Simulation (group project) -->
+        <a class="project-card" href="https://github.com/ibrahimaCS/" target="_blank" rel="noopener">
+          <div class="top">
+            <h3>2D Particle Simulator</h3>
+            <span class="ext">github ↗</span>
+          </div>
+          <div class="meta">ENSIIE · Feb – Jun 2026 · group project · systems programming</div>
+          <p>
+            Team project (four developers, ENSIIE) — a real-time 2D particle
+            simulator written from scratch in <strong>C</strong>. Modular design
+            split across eight units (physics, distribution, camera, rendering,
+            environment, vector maths, input, interface), driven by a
+            <strong>POSIX-threaded</strong> main loop where a dedicated event
+            thread reads keyboard input while the physics/rendering thread
+            advances the simulation, coordinated through <strong>C11 atomics</strong>.
+            Renders PPM frame sequences and ships with a small
+            <strong>PHP</strong> web interface for control and playback.
+          </p>
+          <div class="stack">
+            <span>C</span><span>POSIX Threads</span><span>C11 Atomics</span>
+            <span>PHP</span><span>Systems Programming</span>
+            <span>Real-time Rendering</span>
+          </div>
+        </a>
+
+        <!-- Project 2 : OCaml VM -->
+        <a class="project-card" href="https://github.com/ibrahimaCS/" target="_blank" rel="noopener">
+          <div class="top">
+            <h3>OCaml Bytecode Virtual Machine</h3>
+            <span class="ext">github ↗</span>
+          </div>
+          <div class="meta">ENSIIE · Dec 2025 – Jan 2026 · systems programming</div>
+          <p>
+            A bytecode interpreter for OCaml, written from scratch in C.
+            Implements the core execution loop, stack management, memory
+            layout, and the main instruction set — a hands-on tour of what
+            usually stays hidden under the language runtime.
+          </p>
+          <div class="stack">
+            <span>C</span><span>OCaml bytecode</span><span>Systems</span>
+          </div>
+        </a>
+
+        <!-- Project 3 : OCaml Relational DB -->
+        <a class="project-card" href="https://github.com/ibrahimaCS/" target="_blank" rel="noopener">
+          <div class="top">
+            <h3>Relational Database Engine in OCaml</h3>
+            <span class="ext">github ↗</span>
+          </div>
+          <div class="meta">ENSIIE · 2025 · functional programming</div>
+          <p>
+            A miniature relational engine built in pure OCaml: typed schemas,
+            nullable columns, tables, functional dependencies and core
+            relational-algebra operations. Custom tail-recursive list
+            primitives to keep the stack safe on large inputs.
+          </p>
+          <div class="stack">
+            <span>OCaml</span><span>Functional Programming</span>
+            <span>Relational Algebra</span>
+          </div>
+        </a>
+
+        <!-- Project 4 : TIPE Sandpile -->
+        <a class="project-card" href="https://github.com/ibrahimaCS/" target="_blank" rel="noopener">
+          <div class="top">
+            <h3>Abelian Sandpile Model — TIPE</h3>
+            <span class="ext">github ↗</span>
+          </div>
+          <div class="meta">CPGE Thiès · Sep 2024 – Jun 2025 · applied mathematics</div>
+          <p>
+            Two-year research project (Travail d'Initiative Personnelle Encadré):
+            probabilistic modelling and numerical simulation in Python of phase
+            transitions in the abelian sandpile model. Uses Markov chains and
+            cellular automata to predict the onset of avalanches — a classic
+            example of self-organised criticality.
+          </p>
+          <div class="stack">
+            <span>Python</span><span>Markov Chains</span>
+            <span>Cellular Automata</span><span>NumPy</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills" class="reveal">
+      <div class="sec-head">
+        <span class="num">05</span>
+        <h2>Skills</h2>
+      </div>
+
+      <div class="skills-grid">
+
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <div class="tags">
+            <span>Python</span><span>C / C++</span><span>Bash / Shell</span><span>Java</span><span>OCaml</span>
+            <span>JavaScript</span><span>PHP</span><span>R</span>
+            <span>SQL</span><span>HTML / CSS</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Scientific &amp; ML Stack</h3>
+          <div class="tags">
+            <span>NumPy</span><span>SciPy</span><span>Pandas</span>
+            <span>Matplotlib</span><span>Machine Learning (Python)</span>
+            <span>Statistical Modeling</span>
+            <span>Mathematical Optimization &amp; Linear Programming</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Back-End &amp; APIs</h3>
+          <div class="tags">
+            <span>Flask</span><span>Flask-WTF</span><span>REST APIs</span>
+            <span>Back-End Development</span>
+            <span>WSGI deployment</span>
+            <span>Circuit Breaker · Load Shedding</span>
+            <span>pytest</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Systems &amp; Tools</h3>
+          <div class="tags">
+            <span>Linux</span><span>Git / GitLab</span>
+            <span>Operating Systems &amp; Processes</span>
+            <span>Databases &amp; SQL / PostgreSQL</span>
+            <span>TCP/IP</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>CS Foundations</h3>
+          <div class="tags">
+            <span>Data Structures &amp; Algorithms</span>
+            <span>Object-Oriented Programming</span>
+            <span>Functional Programming (OCaml)</span>
+            <span>Software Engineering</span>
+            <span>Probability</span><span>Physics</span>
+            <span>Mathematics</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Domains of Interest</h3>
+          <div class="tags">
+            <span>Computer Networking</span>
+            <span>High-Performance Computing</span>
+            <span>AI / ML Infrastructure</span>
+            <span>Software Engineering</span>
+            <span>Systems Administration</span>
+            <span>Embedded Systems</span>
+            <span>Quantum Engineering</span>
+            <span>Cybersecurity</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Soft Skills</h3>
+          <div class="tags">
+            <span>Problem Solving</span><span>Adaptability</span>
+            <span>Team Work</span><span>Curiosity</span><span>Rigor</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ EXTRA (Certificates / Languages / Interests) ============ -->
+    <section id="extra" class="reveal">
+      <div class="sec-head">
+        <span class="num">06</span>
+        <h2>Extras</h2>
+      </div>
+
+      <div class="two-col" style="margin-bottom: 32px;">
+        <div>
+          <h3>Certificates</h3>
+          <div class="cert-line">
+            <strong>Deep Learning with TensorFlow</strong> — IBM SkillsBuild
+            <span class="date">June 2026</span>
+          </div>
+          <div class="cert-line" style="margin-top: 12px;">
+            <strong>Machine Learning with Python</strong> — IBM SkillsBuild
+            <span class="date">Jan 2026</span>
+          </div>
+        </div>
+        <div>
+          <h3>Languages</h3>
+          <p><strong style="color: var(--ink);">French</strong> — Native</p>
+          <p><strong style="color: var(--ink);">English</strong> — Professional working</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <h3>Location</h3>
+          <p>Évry, Île-de-France, France</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="reveal contact-block">
+  <h2>Let's <em>build</em> something.</h2>
+  <p>
+    Actively looking for a <strong style="color: var(--ink);">Summer 2027 internship</strong>
+    in computer networking, HPC, AI/ML infrastructure, systems administration,
+    embedded systems or quantum engineering. Reach me on any of the channels below.
+  </p>
+
+  <div class="contact-links">
+    <a href="mailto:ibrahimadiaby7903@gmail.com">mail</a>
+    <a href="tel:+33751375415">+33 7 51 37 54 15</a>
+    <a href="https://www.linkedin.com/in/ibrahima-diaby-73b43b396" target="_blank" rel="noopener">linkedin</a>
+    <a href="https://github.com/ibrahimaCS/" target="_blank" rel="noopener">github</a>
+  </div>
+</section>
+
+    <footer>
+      <span>© 2026 Ibrahima Diaby — hand-crafted, no template.</span>
+      <span>
+        <a href="https://github.com/ibrahimaCS/" target="_blank" rel="noopener">source ↗</a>
+      </span>
+    </footer>
+
+  </main>
+
+  <script>
+    // Reveal-on-scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    // Active dot in side navigation
+    const navDots = document.querySelectorAll(".side-nav a");
+    const sections = [...navDots].map((a) => document.querySelector(a.getAttribute("href")));
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = sections.indexOf(entry.target);
+          navDots.forEach((d) => d.classList.remove("active"));
+          if (idx >= 0) navDots[idx].classList.add("active");
+        }
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    sections.forEach((s) => s && navObserver.observe(s));
+  </script>
+
+</body>
+</html>
+
